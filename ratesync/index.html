@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RateSync: Currency Converter — Official App by Lionz Studio</title>
+  <meta name="description" content="RateSync is a sleek currency converter developed by Lionz Studio. Convert 150+ currencies offline, analyze historical charts, set background rate alerts, and customize home screen widgets.">
+  <link rel="icon" type="image/png" href="../assets/ratesync_logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080B11;
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(56, 189, 248, 0.3);
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --accent: #38BDF8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --purple: #8B5CF6;
+      --purple-glow: rgba(139, 92, 246, 0.25);
+      --green: #22C55E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 10% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 30px 20px 60px;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(-2px);
+    }
+
+    .studio-pill {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Hero App Header */
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+
+    .app-main-logo {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 24px var(--accent-glow);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+    }
+
+    .app-header-text h1 {
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .app-byline {
+      font-size: 15px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .byline-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--text-muted);
+      border-radius: 50%;
+    }
+
+    .app-badge-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ADE80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .app-hero-desc {
+      font-size: 16px;
+      color: #CBD5E1;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    /* Actions Bar */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080B11;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      background: #7DD3FC;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Feature Grid */
+    .section-heading {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .feature-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      backdrop-filter: blur(16px);
+      transition: all 0.2s ease;
+    }
+
+    .feature-box:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .feature-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Specs & Compliance */
+    .specs-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spec-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .spec-value {
+      font-size: 14.5px;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer.app-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    footer.app-footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 640px) {
+      .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+      .hero-card {
+        padding: 24px;
+      }
+      .app-main-logo {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Nav -->
+    <nav class="top-nav">
+      <a href="../" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Back to Lionz Studio</span>
+      </a>
+      <span class="studio-pill">Lionz Studio App</span>
+    </nav>
+
+    <!-- Hero Card -->
+    <section class="hero-card">
+      <div class="app-header">
+        <img src="../assets/ratesync_logo.png" alt="RateSync Logo" class="app-main-logo">
+        <div class="app-header-text">
+          <h1>RateSync: Currency Converter</h1>
+          <div class="app-byline">
+            <span>By Lionz Studio</span>
+            <span class="byline-dot"></span>
+            <span>Finance & Utilities</span>
+            <span class="byline-dot"></span>
+            <span class="app-badge-active">● Android App</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="app-hero-desc">
+        RateSync is a sleek, modern currency converter designed for travelers, digital nomads, investors, and everyday users. Calculate foreign exchange across 150+ world currencies instantly, track multi-year historical trend charts, set background target rate alerts, and monitor your favorite pairs directly from your Android home screen.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://lionzstudio.github.io/ratesync-privacy/" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Privacy Policy & Compliance
+        </a>
+        <a href="../app-ads.txt" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+          Authorized Sellers (app-ads.txt)
+        </a>
+        <a href="mailto:lionzstudio.dev@gmail.com" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          Contact Support
+        </a>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section>
+      <h2 class="section-heading">Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-box">
+          <span class="feature-icon">💱</span>
+          <h3 class="feature-title">150+ World Currencies</h3>
+          <p class="feature-desc">Convert multiple global currencies simultaneously as you type with a smart collapsible calculator keypad.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">📈</span>
+          <h3 class="feature-title">Interactive Charts</h3>
+          <p class="feature-desc">Visualize historical foreign exchange movements across 7D, 1M, 3M, 1Y, and 5Y with multi-currency comparison.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">🔔</span>
+          <h3 class="feature-title">Smart Rate Alerts</h3>
+          <p class="feature-desc">Set custom target threshold alerts. Background workers automatically check rates aligned with daily market updates.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">📱</span>
+          <h3 class="feature-title">Home Screen Widgets</h3>
+          <p class="feature-desc">Glance at rates directly on your device home screen with 1x1 Quick Glance and 3x2 Multi-Currency Monitor boards.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">✈️</span>
+          <h3 class="feature-title">100% Offline Ready</h3>
+          <p class="feature-desc">All exchange rates are cached locally, allowing seamless conversions during flights and international travel.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">🔒</span>
+          <h3 class="feature-title">Privacy-First Architecture</h3>
+          <p class="feature-desc">No login or account required. All preferences, alerts, and saved pairs stay securely on your personal device.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical & Compliance Specs -->
+    <section>
+      <h2 class="section-heading">Technical & Publishing Details</h2>
+      <div class="specs-card">
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">Package ID</span>
+            <span class="spec-value"><code>com.ratesync.currencyconverter</code></span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Platform Target</span>
+            <span class="spec-value">Android 14+ (API 21 to 36)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Publisher</span>
+            <span class="spec-value">Lionz Studio</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">AdMob App ID</span>
+            <span class="spec-value"><code>ca-app-pub-8647717449882533</code></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div>
+        <a href="../">Lionz Studio</a> &middot; 
+        <a href="https://lionzstudio.github.io/ratesync-privacy/">Privacy Policy</a> &middot; 
+        <a href="../app-ads.txt">app-ads.txt</a> &middot; 
+        <a href="mailto:lionzstudio.dev@gmail.com">lionzstudio.dev@gmail.com</a>
+      </div>
+      <p>&copy; 2026 Lionz Studio. All rights reserved.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
