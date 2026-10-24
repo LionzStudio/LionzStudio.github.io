@@ -8,8 +8,7 @@ Welcome to the official developer and legal verification portal for **Lionz Stud
 
 | Resource | Direct Link | Purpose |
 |---|---|---|
-| **Developer Website** | [https://lionzstudio.github.io/](https://lionzstudio.github.io/) | Official studio showcase & developer portal |
-| **RateSync Product Page** | [https://lionzstudio.github.io/ratesync/](https://lionzstudio.github.io/ratesync/) | Dedicated app landing page, features & specifications |
+| **Developer Website & App Portal** | [https://lionzstudio.github.io/](https://lionzstudio.github.io/) | RateSync landing page & developer portal |
 | **Authorized Sellers (`app-ads.txt`)** | [https://lionzstudio.github.io/app-ads.txt](https://lionzstudio.github.io/app-ads.txt) | IAB Tech Lab / Google AdMob publisher verification |
 | **Privacy Policy Portal** | [https://lionzstudio.github.io/ratesync-privacy/](https://lionzstudio.github.io/ratesync-privacy/) | Google Play compliance, GDPR/CCPA disclosures |
 | **Contact Support** | [lionzstudio.dev@gmail.com](mailto:lionzstudio.dev@gmail.com) | Direct inquiries, feedback, and user support |
