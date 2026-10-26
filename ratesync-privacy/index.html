@@ -23,6 +23,12 @@
       --success: #22C55E;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+    h2[id] {
+      scroll-margin-top: 30px;
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -340,9 +346,19 @@
         Your customized preferences (such as selected base currency, favorite pairs, custom decimals, and home screen widget configurations) are saved locally on your device using encrypted storage (<code>EncryptedSharedPreferences</code> / <code>KeyStore</code>). This ensures your configuration remains secure and tamper-free on-device.
       </p>
 
-      <h2>7. Data Retention & Deletion</h2>
+      <h2 id="data-deletion">7. Data Retention & Deletion Policy</h2>
       <p>
-        Since RateSync does not maintain centralized user accounts or store personal user data on external servers, all locally saved preferences and cached data are completely deleted from your device whenever you clear the App's storage or uninstall the App from your device.
+        RateSync is committed to full user data sovereignty and privacy transparency. Because RateSync does not require user accounts or store identifiable user profiles on external servers, managing or deleting your data is immediate, transparent, and user-controlled:
+      </p>
+      <div class="highlight-box">
+        <p><strong>How to Delete Your Data:</strong></p>
+        <ul style="margin: 8px 0 0 20px; color: #E2E8F0; font-size: 13.5px; line-height: 1.6;">
+          <li><strong>Local On-Device Data:</strong> All currency watchlists, widget configurations, custom decimal preferences, and background rate alerts reside strictly on your phone. To permanently erase all data, open your Android device <strong>Settings &rarr; Apps &rarr; RateSync &rarr; Storage & Cache &rarr; Clear Storage</strong>, or simply uninstall the application. This purges 100% of local encrypted storage immediately.</li>
+          <li><strong>Support Correspondence & Diagnostic Logs:</strong> If you have previously contacted customer support or submitted feedback and wish to request the deletion of your support emails or associated diagnostic logs, email us directly at <a href="mailto:lionzstudio.dev@gmail.com?subject=RateSync%20Data%20Deletion%20Request" style="color: var(--accent); font-weight: 600;">lionzstudio.dev@gmail.com</a> with the subject <em>"Data Deletion Request"</em>. We will process and permanently delete your email correspondence and records within 48 business hours.</li>
+        </ul>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 10px;">
+        * No user financial transactions or personal records are retained by Lionz Studio following a deletion request.
       </p>
 
       <h2>8. Children's Privacy (COPPA Compliance)</h2>
